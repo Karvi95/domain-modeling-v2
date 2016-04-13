@@ -20,10 +20,31 @@ public class TestMe {
     }
 }
 
+protocol Mathematics {
+    <#requirements#>
+}
+
+extension Double {
+    var USD: Double {
+        return Money(amount: Int(self), currency: "USD")
+    }
+    var GBP: Double {
+        return self
+    }
+    var EUR: Double {
+        return self
+    }
+    var YEN: Double {
+        return self
+    }
+}
+
 ////////////////////////////////////
 // Money
 //
-public struct Money {
+public struct Money : CustomStringConvertible,  Mathematics{
+    public var description : String = "\(currency)\(amount).0"
+    
     public var amount : Int
     public var currency : String
     
@@ -95,7 +116,9 @@ public struct Money {
 ////////////////////////////////////
 // Job
 //
-public class Job {
+public class Job : CustomStringConvertible{
+    public var description: String
+    
     public var title : String
     public var type : JobType
     
@@ -131,7 +154,9 @@ public class Job {
 ////////////////////////////////////
 // Person
 //
-public class Person {
+public class Person : CustomStringConvertible {
+    public var description: String
+    
     public var firstName : String = ""
     public var lastName : String = ""
     public var age : Int = 0
@@ -179,7 +204,9 @@ public class Person {
 ////////////////////////////////////
 // Family
 //
-public class Family {
+public class Family : CustomStringConvertible {
+    public var description: String
+    
     private var members : [Person] = []
   
     public init(spouse1: Person, spouse2: Person) {
@@ -298,19 +325,3 @@ public struct MoneyExtra {
         }
     }
 }
-
-let ted = Person(firstName: "Ted", lastName: "Neward", age: 45)
-ted.job = Job(title: "Gues Lecturer", type: Job.JobType.Salary(1000))
-
-let charlotte = Person(firstName: "Charlotte", lastName: "Neward", age: 45)
-
-let family = Family(spouse1: ted, spouse2: charlotte)
-
-let mike = Person(firstName: "Mike", lastName: "Neward", age: 22)
-mike.job = Job(title: "Burger-Flipper", type: Job.JobType.Hourly(5.5))
-
-let matt = Person(firstName: "Matt", lastName: "Neward", age: 16)
-family.haveChild(mike)
-family.haveChild(matt)
-
-let familyIncome = family.householdIncome()
