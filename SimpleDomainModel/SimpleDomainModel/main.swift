@@ -20,10 +20,46 @@ public class TestMe {
     }
 }
 
-protocol Mathematics {
-    <#requirements#>
+
+////////////////////////////////////
+// CustomStringConvertible Protocol
+//
+protocol CustomStringConvertible {
+    var description : String { get }
 }
 
+
+
+////////////////////////////////////
+// Mathematics Protocol & Methods
+//
+protocol Mathematics {
+    func + (left: Money, right: Money) -> Money
+    func - (left: Money, right: Money) -> Money
+}
+
+func + (left: Money, right: Money) -> Money {
+    if (left.currency != right.currency) {
+        let converted = left.convert(right.currency)
+        return Money(amount: (converted.amount + right.amount), currency: right.currency)
+    } else {
+        return Money(amount: (left.amount + right.amount), currency: right.currency)
+    }
+}
+
+func - (left: Money, right: Money) -> Money {
+    if (left.currency != right.currency) {
+        let converted = left.convert(right.currency)
+        return Money(amount: (converted.amount - right.amount), currency: right.currency)
+    } else {
+        return Money(amount: (left.amount - right.amount), currency: right.currency)
+    }
+}
+
+
+////////////////////////////////////
+// Double Extension
+//
 extension Double {
     var USD: Double {
         return Money(amount: Int(self), currency: "USD")
@@ -42,8 +78,7 @@ extension Double {
 ////////////////////////////////////
 // Money
 //
-public struct Money : CustomStringConvertible,  Mathematics{
-    public var description : String = "\(currency)\(amount).0"
+public struct Money : CustomStringConvertible, Mathematics {
     
     public var amount : Int
     public var currency : String
