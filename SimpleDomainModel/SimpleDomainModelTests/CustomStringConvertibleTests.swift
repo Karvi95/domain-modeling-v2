@@ -11,7 +11,7 @@ import XCTest
 class CustomStringConvertibleTests: XCTestCase {
     func MoneyDescriptionTest() {
         let twelveUSD = Money(amount: 12, currency: "USD")
-        XCTAssert(twelveGBP.description == "GBP12.0")
+        XCTAssert(twelveUSD.description == "GBP12.0")
     }
     
     func JobDescriptionTest() {
@@ -35,10 +35,9 @@ class CustomStringConvertibleTests: XCTestCase {
         let family = Family(spouse1: arvind, spouse2: test)
         
         let child = Person(firstName: "child'sFirstName", lastName: "child'sLastName", age: 18)
-        mike.job = Job(title: "Burger-Flipper", type: Job.JobType.Hourly(5.5))
+        child.job = Job(title: "Burger-Flipper", type: Job.JobType.Hourly(5.5))
         
         family.haveChild(child)
         XCTAssert(family.description == "This family is comprised of: Arvind Krish, aFirstName aLastName, child'sFirstName child'sLastName. They make $10000011000.")
     }
 }
-10000011000
