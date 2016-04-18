@@ -147,7 +147,7 @@ public struct Money : CustomStringConvertible, Mathematics {
     }
     
     // CustomDescription
-    var description : String {
+    public var description : String {
         get{
             return "\(self.currency)\(self.amount).0"
         }
@@ -158,8 +158,6 @@ public struct Money : CustomStringConvertible, Mathematics {
 // Job
 //
 public class Job : CustomStringConvertible{
-    public var description: String
-    
     public var title : String
     public var type : JobType
     
@@ -192,7 +190,7 @@ public class Job : CustomStringConvertible{
     }
 
     // CustomDescription
-    var description : String {
+    public var description : String {
         get {
             switch self.type {
             case .Salary(let aSalary):
@@ -208,8 +206,7 @@ public class Job : CustomStringConvertible{
 // Person
 //
 public class Person : CustomStringConvertible {
-    public var description: String
-    
+  
     public var firstName : String = ""
     public var lastName : String = ""
     public var age : Int = 0
@@ -265,8 +262,6 @@ public class Person : CustomStringConvertible {
 // Family
 //
 public class Family : CustomStringConvertible {
-    public var description: String
-    
     private var members : [Person] = []
   
     public init(spouse1: Person, spouse2: Person) {
@@ -311,7 +306,7 @@ public class Family : CustomStringConvertible {
             for i in 1..<members.count {
                 descriptBase += ", " + members[i].firstName + " " + members[i].lastName
             }
-            descriptBase += "."
+            descriptBase += ". They make: $\(self.householdIncome())."
             return descriptBase
         }
     }
