@@ -29,7 +29,6 @@ protocol CustomStringConvertible {
 }
 
 
-
 ////////////////////////////////////
 // Mathematics Protocol & Methods
 //
@@ -146,6 +145,9 @@ public struct Money : CustomStringConvertible, Mathematics {
             return Money(amount: (from.amount - self.amount), currency: from.currency)
         }
     }
+    
+    // CustomDescription
+    var description = "\(self.currency)\(self.amount).0"
 }
 
 ////////////////////////////////////
@@ -184,6 +186,9 @@ public class Job : CustomStringConvertible{
             self.type = Job.JobType.Hourly(rate + amt)
         }
     }
+
+    // CustomDescription
+    var description = "\(self.currency)\(self.amount).0"
 }
 
 ////////////////////////////////////
@@ -234,6 +239,9 @@ public class Person : CustomStringConvertible {
     public func toString() -> String {
         return "[Person: firstName:\(self.firstName) lastName:\(self.lastName) age:\(self.age) job:\(self.job) spouse:\(self.spouse)]"
     }
+
+    // CustomDescription
+    var description = self.toString()
 }
 
 ////////////////////////////////////
