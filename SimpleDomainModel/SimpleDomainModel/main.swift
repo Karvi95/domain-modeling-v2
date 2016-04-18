@@ -60,17 +60,17 @@ func - (left: Money, right: Money) -> Money {
 // Double Extension
 //
 extension Double {
-    var USD: Double {
-        return Money(amount: Int(self), currency: "USD")
+    var USD: Money {
+        return Money(amount: Int(round(self)), currency: "USD")
     }
-    var GBP: Double {
-        return self
+    var GBP: Money {
+        return Money(amount: Int(round(self)), currency: "GBP")
     }
-    var EUR: Double {
-        return self
+    var EUR: Money {
+        return Money(amount: Int(round(self)), currency: "EUR")
     }
-    var YEN: Double {
-        return self
+    var YEN: Money {
+        return Money(amount: Int(round(self)), currency: "YEN")
     }
 }
 
