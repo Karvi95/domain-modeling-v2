@@ -147,7 +147,11 @@ public struct Money : CustomStringConvertible, Mathematics {
     }
     
     // CustomDescription
-    var description = "\(self.currency)\(self.amount).0"
+    var description : String {
+        get{
+            return "\(self.currency)\(self.amount).0"
+        }
+    }
 }
 
 ////////////////////////////////////
@@ -188,7 +192,16 @@ public class Job : CustomStringConvertible{
     }
 
     // CustomDescription
-    var description = "\(self.currency)\(self.amount).0"
+    var description : String {
+        get {
+            switch self.type {
+            case .Salary(let aSalary):
+                return "\(self.title) makes $\(aSalary)"
+            case .Hourly(let rate):
+                return  "\(self.title)'s rate is \(rate)"
+            }
+        }
+    }
 }
 
 ////////////////////////////////////
@@ -241,7 +254,11 @@ public class Person : CustomStringConvertible {
     }
 
     // CustomDescription
-    var description = self.toString()
+    var description : String {
+        get {
+            return self.toString()
+        }
+    }
 }
 
 ////////////////////////////////////
@@ -285,86 +302,18 @@ public class Family : CustomStringConvertible {
         
         return sum
     }
-}
-
-////////////////////////////////////
-// MoneyExtra
-//
-public struct MoneyExtra {
-    public var amount : Int
-    public var currency : Currency
     
-    public enum Currency : String {
-        case USD = "USD"
-        case GBP = "GBP"
-        case EUR = "EUR"
-        case CAN = "CAN"
-    }
-    
-    init(amount : Int, currency : Currency) {
-        self.amount = amount
-        self.currency = currency
-    }
-    
-    public func convert(to: Currency) -> MoneyExtra {
-        switch to {
-        case .USD:
-            if(self.currency.rawValue == "GBP") {
-                return MoneyExtra(amount: (2 * self.amount), currency: to)
-            } else if(self.currency.rawValue == "EUR") {
-                return MoneyExtra(amount: ((2 * self.amount) / 3), currency: to)
-            } else if(self.currency.rawValue == "CAN"){
-                return MoneyExtra(amount: (4 * (self.amount) / 5), currency: to)
-            } else {
-                return MoneyExtra(amount: (self.amount), currency: to)
+    // CustomDescription
+    var description : String {
+        get {
+            var descriptBase = "This family is comprised of: "
+            descriptBase += members[0].firstName + " " + members[0].lastName
+            for i in 1..<members.count {
+                descriptBase += ", " + members[i].firstName + " " + members[i].lastName
             }
-        case .GBP:
-            if(self.currency.rawValue == "USD") {
-                return MoneyExtra(amount: (self.amount / 2), currency: to)
-            } else if(self.currency.rawValue == "EUR") {
-                return MoneyExtra(amount: (self.amount / 3), currency: to)
-            } else if(self.currency.rawValue == "CAN"){
-                return MoneyExtra(amount: (2 * (self.amount) / 5), currency: to)
-            } else {
-                return MoneyExtra(amount: (self.amount), currency: to)
-            }
-        case .EUR:
-            if(self.currency.rawValue == "USD") {
-                return MoneyExtra(amount: ((3 * self.amount) / 2), currency: to)
-            } else if(self.currency.rawValue == "GBP") {
-                return MoneyExtra(amount: (3 * self.amount), currency: to)
-            } else if(self.currency.rawValue == "CAN"){
-                return MoneyExtra(amount: (6 * (self.amount) / 5), currency: to)
-            } else {
-                return MoneyExtra(amount: (self.amount), currency: to)
-            }
-        case .CAN:
-            if(self.currency.rawValue == "USD") {
-                return MoneyExtra(amount: (5 * (self.amount) / 4), currency: to)
-            } else if(self.currency.rawValue == "GBP") {
-                return MoneyExtra(amount: (5 * (self.amount) / 2), currency: to)
-            } else if(self.currency.rawValue == "EUR"){
-                return MoneyExtra(amount: (5 * (self.amount) / 6), currency: to)
-            } else {
-                return MoneyExtra(amount: (self.amount), currency: to)
-            }
+            descriptBase += "."
+            return descriptBase
         }
     }
     
-    public func add(to: MoneyExtra) -> MoneyExtra {
-        if (self.currency.rawValue != to.currency.rawValue) {
-            let converted = self.convert(to.currency)
-            return MoneyExtra(amount: (converted.amount + to.amount), currency: to.currency)
-        } else {
-            return MoneyExtra(amount: (self.amount + to.amount), currency: to.currency)
-        }
-    }
-    public func subtract(from: MoneyExtra) -> MoneyExtra {
-        if (self.currency.rawValue != from.currency.rawValue) {
-            let converted = self.convert(self.currency)
-            return MoneyExtra(amount: (from.amount - converted.amount), currency: from.currency)
-        } else {
-            return MoneyExtra(amount: (from.amount - self.amount), currency: from.currency)
-        }
-    }
 }
