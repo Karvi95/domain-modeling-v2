@@ -124,6 +124,12 @@ public struct Money : CustomStringConvertible, Mathematics {
         else if (self.currency == "CAN" && to == "EUR") {
             return Money(amount: (6 * (self.amount) / 5), currency: to)
         }
+        else if (self.currency == "USD" && to == "YEN") {
+            return Money(amount: (109 * (self.amount)), currency: to)
+        }
+        else if (self.currency == "YEN" && to == "USD") {
+            return Money(amount: ((self.amount) / 109), currency: to)
+        }
         else {
             return Money(amount: (self.amount), currency: to)
         }

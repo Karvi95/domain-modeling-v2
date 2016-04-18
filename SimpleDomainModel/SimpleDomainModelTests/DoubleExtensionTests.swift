@@ -9,14 +9,30 @@
 import XCTest
 
 class DoubleExtensionTests: XCTestCase {
-    func USDDoubleTest() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func EURDefiningTest() {
+        let twoEUR = 2.0.EUR
+        
+        XCTAssert(twoEUR.amount == 2)
+        XCTAssert(twoEUR.currency == "EUR")
+    }
+    
+    func EURAddingSameTest() {
+        let twoEUR = 2.0.EUR
+        let fiveEUR = 5.0.EUR
+        
+        let result = twoEUR + fiveEUR
+        
+        XCTAssert(result.amount == 7)
+        XCTAssert(twoEUR.currency == "EUR")
     }
 
-    func YENDoubleTest() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func EURMinusingDiffTest() {
+        let twelveEUR = 12.0.EUR
+        let twoGBP = 2.0.GBP
+        
+        let result = twelveEUR - twoGBP
+        
+        XCTAssert(result.amount == 2)
+        XCTAssert(result.currency == "GBP")
     }
-
 }
