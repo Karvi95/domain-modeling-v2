@@ -322,7 +322,7 @@ public class Family : CustomStringConvertible {
             for i in 1..<members.count {
                 descriptBase += ", " + members[i].firstName + " " + members[i].lastName
             }
-            descriptBase += ". They make $\(self.householdIncome())."
+            descriptBase += ". They make: $\(self.householdIncome())."
             return descriptBase
         }
     }

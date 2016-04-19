@@ -42,6 +42,6 @@ class CustomStringConvertibleTests: XCTestCase {
         child.job = Job(title: "Burger-Flipper", type: Job.JobType.Hourly(5.5))
         
         family.haveChild(child)
-        XCTAssert(family.description == "This family is comprised of: Arvind Krish, aFirstName aLastName, child'sFirstName child'sLastName. They make $10000011000.")
+        XCTAssert(family.description == "This family is comprised of: Arvind Krish, aFirstName aLastName, child'sFirstName child'sLastName. They make: $10000011000.")
     }
 }
