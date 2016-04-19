@@ -31,7 +31,6 @@ class CustomStringConvertibleTests: XCTestCase {
         
         let test = Person(firstName: "aFirstName", lastName: "aLastName", age: 31)
         
-        
         let family = Family(spouse1: arvind, spouse2: test)
         
         let child = Person(firstName: "child'sFirstName", lastName: "child'sLastName", age: 18)
