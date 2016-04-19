@@ -259,7 +259,17 @@ public class Person : CustomStringConvertible {
     // CustomDescription
     var description : String {
         get {
-            return self.toString()
+            var myJob = "unemployed"
+            if self.job != nil {
+                myJob = self.job!.title
+            }
+            
+            var mySpouse = "None"
+            if self.spouse != nil {
+                mySpouse = self.spouse!.firstName + self.spouse!.lastName
+            }
+            
+            return "[Person: firstName:\(self.firstName) lastName:\(self.lastName) age:\(self.age) job:\(myJob) spouse:\(mySpouse)]"
         }
     }
 }
@@ -312,9 +322,8 @@ public class Family : CustomStringConvertible {
             for i in 1..<members.count {
                 descriptBase += ", " + members[i].firstName + " " + members[i].lastName
             }
-            descriptBase += ". They make: $\(self.householdIncome())."
+            descriptBase += ". They make $\(self.householdIncome())."
             return descriptBase
         }
     }
-    
 }

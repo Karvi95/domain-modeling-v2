@@ -9,14 +9,14 @@
 import XCTest
 
 class DoubleExtensionTests: XCTestCase {
-    func EURDefiningTest() {
+    func testEURDefining() {
         let twoEUR = 2.0.EUR
         
         XCTAssert(twoEUR.amount == 2)
         XCTAssert(twoEUR.currency == "EUR")
     }
     
-    func EURAddingSameTest() {
+    func testEURAddingSame() {
         let twoEUR = 2.0.EUR
         let fiveEUR = 5.0.EUR
         
@@ -26,7 +26,7 @@ class DoubleExtensionTests: XCTestCase {
         XCTAssert(twoEUR.currency == "EUR")
     }
     
-    func EURMinusingDiffTest() {
+    func testEURMinusingDiff() {
         let twelveEUR = 12.0.EUR
         let twoGBP = 2.0.GBP
         

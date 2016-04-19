@@ -9,7 +9,7 @@
 import XCTest
 
 class MathematicsTests: XCTestCase {
-    func AddingOperatorCorrectAmountTest() {
+    func testAddingOperatorCorrectAmount() {
         let tenUSD = Money(amount: 10, currency: "USD")
         let fiveYEN = Money(amount: 5, currency: "YEN")
         
@@ -17,7 +17,7 @@ class MathematicsTests: XCTestCase {
         XCTAssert(result.amount == 1095)
     }
     
-    func AddingOperatorCorrectCurrencyTest() {
+    func testAddingOperatorCorrectCurrency() {
         let tenUSD = Money(amount: 10, currency: "USD")
         let fiveYEN = Money(amount: 5, currency: "YEN")
         
@@ -25,7 +25,7 @@ class MathematicsTests: XCTestCase {
         XCTAssert(result.currency == "YEN")
     }
     
-    func MinusingOperatorCorrectAmountTest() {
+    func testMinusingOperatorCorrectAmount() {
         let onesixthreefiveYEN = Money(amount: 1635, currency: "YEN")
         let tenUSD = Money(amount: 10, currency: "USD")
         
@@ -33,7 +33,7 @@ class MathematicsTests: XCTestCase {
         XCTAssert(result.amount == 5)
     }
     
-    func MinusingOperatorCorrectCurrencyTest() {
+    func testMinusingOperatorCorrectCurrency() {
         let onesixthreefiveYEN = Money(amount: 1635, currency: "YEN")
         let tenUSD = Money(amount: 10, currency: "USD")
         
