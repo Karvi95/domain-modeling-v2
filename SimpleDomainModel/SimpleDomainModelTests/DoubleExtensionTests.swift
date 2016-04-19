@@ -25,7 +25,7 @@ class DoubleExtensionTests: XCTestCase {
         XCTAssert(result.amount == 7)
         XCTAssert(twoEUR.currency == "EUR")
     }
-
+    
     func EURMinusingDiffTest() {
         let twelveEUR = 12.0.EUR
         let twoGBP = 2.0.GBP

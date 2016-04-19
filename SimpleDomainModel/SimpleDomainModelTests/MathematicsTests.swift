@@ -16,7 +16,7 @@ class MathematicsTests: XCTestCase {
         let result = tenUSD + fiveYEN
         XCTAssert(result.amount == 1095)
     }
-
+    
     func AddingOperatorCorrectCurrencyTest() {
         let tenUSD = Money(amount: 10, currency: "USD")
         let fiveYEN = Money(amount: 5, currency: "YEN")
@@ -40,5 +40,4 @@ class MathematicsTests: XCTestCase {
         let result = onesixthreefiveYEN - tenUSD
         XCTAssert(result.currency == "USD")
     }
-
 }
